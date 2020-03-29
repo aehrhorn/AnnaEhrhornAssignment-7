@@ -3,4 +3,43 @@ title: "Anna Ehrhorn Assignment #7"
 output: html_notebook
 ---
 
+Question 1
+A function that runs a linear regression and prints a logical
+of the residuals that are the largest certain % with the following factors:
+x = explantory variable
+y = response variable
+p = a number
+
+```{r}
+lm.regress.resids <- function(x, y, p) {
+  descriptives <- summary(my.data)
+  correlation <- cor(x, y)
+  regression.model <- lm(y ~ x,
+            data = my.data)
+  regress.model.sum <- summary(regression.model)
+  resids <- regression.model$residuals
+  absolute.resids <- abs(resids)
+  logical.resids <- as.logical(sort(absolute.resids) #how to select 10%
+  return(logical.resids)
+  print(plot(correlation, col = "blue")
+              abline(regression.model))
+}
+```
+
+
+Question 2
+Plot a scatterploy with a regression line of a quantitative response and 
+explanatory variable, and highlight the 10% largest residuals on the 
+scatterplot.
+(n >= 50).
+
+```{r include=FALSE}
+library(here)
+
+my.data <- read.csv(here("XX.csv"))  #decide on dataset
+```
+
+```{r}
+lm.regress.resids(x, y, 10) #enter in variables
+```
 

@@ -1749,9 +1749,39 @@ summary {
 
 
 <!-- rnb-text-begin -->
+<p>Question 1 A function that runs a linear regression and prints a logical of the residuals that are the largest certain % with the following factors: x = explantory variable y = response variable p = a number</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG0ucmVncmVzcy5yZXNpZHMgPC0gZnVuY3Rpb24oeCwgeSwgcCkge1xuICBkZXNjcmlwdGl2ZXMgPC0gc3VtbWFyeShteS5kYXRhKVxuICBjb3JyZWxhdGlvbiA8LSBjb3IoeCwgeSlcbiAgcmVncmVzc2lvbi5tb2RlbCA8LSBsbSh5IH4geCxcbiAgICAgICAgICAgIGRhdGEgPSBteS5kYXRhKVxuICByZWdyZXNzLm1vZGVsLnN1bSA8LSBzdW1tYXJ5KHJlZ3Jlc3Npb24ubW9kZWwpXG4gIHJlc2lkcyA8LSByZWdyZXNzaW9uLm1vZGVsJHJlc2lkdWFsc1xuICBhYnNvbHV0ZS5yZXNpZHMgPC0gYWJzKHJlc2lkcylcbiAgbG9naWNhbC5yZXNpZHMgPC0gYXMubG9naWNhbChzb3J0KGFic29sdXRlLnJlc2lkcykgI2hvdyB0byBzZWxlY3QgMTAlXG4gIHJldHVybihsb2dpY2FsLnJlc2lkcylcbiAgcHJpbnQocGxvdChjb3JyZWxhdGlvbiwgY29sID0gXCJibHVlXCIpXG4gICAgICAgICAgICAgIGFibGluZShyZWdyZXNzaW9uLm1vZGVsKSlcbn1cbmBgYCJ9 -->
+<pre class="r"><code>lm.regress.resids &lt;- function(x, y, p) {
+  descriptives &lt;- summary(my.data)
+  correlation &lt;- cor(x, y)
+  regression.model &lt;- lm(y ~ x,
+            data = my.data)
+  regress.model.sum &lt;- summary(regression.model)
+  resids &lt;- regression.model$residuals
+  absolute.resids &lt;- abs(resids)
+  logical.resids &lt;- as.logical(sort(absolute.resids) #how to select 10%
+  return(logical.resids)
+  print(plot(correlation, col = &quot;blue&quot;)
+              abline(regression.model))
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Question 2 Plot a scatterploy with a regression line of a quantitative response and explanatory variable, and highlight the 10% largest residuals on the scatterplot. (n &gt;= 50).</p>
+<!-- rnb-text-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG0ucmVncmVzcy5yZXNpZHMoeCwgeSwgMTApICNlbnRlciBpbiB2YXJpYWJsZXNcbmBgYCJ9 -->
+<pre class="r"><code>lm.regress.resids(x, y, 10) #enter in variables</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkFubmEgRWhyaG9ybiBBc3NpZ25tZW50ICM3Ig0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIkFubmEgRWhyaG9ybiBBc3NpZ25tZW50ICM3Ig0Kb3V0cHV0OiBodG1sX25vdGVib29rDQotLS0NCg0KUXVlc3Rpb24gMQ0KQSBmdW5jdGlvbiB0aGF0IHJ1bnMgYSBsaW5lYXIgcmVncmVzc2lvbiBhbmQgcHJpbnRzIGEgbG9naWNhbA0Kb2YgdGhlIHJlc2lkdWFscyB0aGF0IGFyZSB0aGUgbGFyZ2VzdCBjZXJ0YWluICUgd2l0aCB0aGUgZm9sbG93aW5nIGZhY3RvcnM6DQp4ID0gZXhwbGFudG9yeSB2YXJpYWJsZQ0KeSA9IHJlc3BvbnNlIHZhcmlhYmxlDQpwID0gYSBudW1iZXINCg0KYGBge3J9DQpsbS5yZWdyZXNzLnJlc2lkcyA8LSBmdW5jdGlvbih4LCB5LCBwKSB7DQogIGRlc2NyaXB0aXZlcyA8LSBzdW1tYXJ5KG15LmRhdGEpDQogIGNvcnJlbGF0aW9uIDwtIGNvcih4LCB5KQ0KICByZWdyZXNzaW9uLm1vZGVsIDwtIGxtKHkgfiB4LA0KICAgICAgICAgICAgZGF0YSA9IG15LmRhdGEpDQogIHJlZ3Jlc3MubW9kZWwuc3VtIDwtIHN1bW1hcnkocmVncmVzc2lvbi5tb2RlbCkNCiAgcmVzaWRzIDwtIHJlZ3Jlc3Npb24ubW9kZWwkcmVzaWR1YWxzDQogIGFic29sdXRlLnJlc2lkcyA8LSBhYnMocmVzaWRzKQ0KICBsb2dpY2FsLnJlc2lkcyA8LSBhcy5sb2dpY2FsKHNvcnQoYWJzb2x1dGUucmVzaWRzKSAjaG93IHRvIHNlbGVjdCAxMCUNCiAgcmV0dXJuKGxvZ2ljYWwucmVzaWRzKQ0KICBwcmludChwbG90KGNvcnJlbGF0aW9uLCBjb2wgPSAiYmx1ZSIpDQogICAgICAgICAgICAgIGFibGluZShyZWdyZXNzaW9uLm1vZGVsKSkNCn0NCmBgYA0KDQoNClF1ZXN0aW9uIDINClBsb3QgYSBzY2F0dGVycGxveSB3aXRoIGEgcmVncmVzc2lvbiBsaW5lIG9mIGEgcXVhbnRpdGF0aXZlIHJlc3BvbnNlIGFuZCANCmV4cGxhbmF0b3J5IHZhcmlhYmxlLCBhbmQgaGlnaGxpZ2h0IHRoZSAxMCUgbGFyZ2VzdCByZXNpZHVhbHMgb24gdGhlIA0Kc2NhdHRlcnBsb3QuDQoobiA+PSA1MCkuDQoNCmBgYHtyIGluY2x1ZGU9RkFMU0V9DQpsaWJyYXJ5KGhlcmUpDQoNCm15LmRhdGEgPC0gcmVhZC5jc3YoaGVyZSgiWFguY3N2IikpICAjZGVjaWRlIG9uIGRhdGFzZXQNCmBgYA0KDQpgYGB7cn0NCmxtLnJlZ3Jlc3MucmVzaWRzKHgsIHksIDEwKSAjZW50ZXIgaW4gdmFyaWFibGVzDQpgYGANCg0K</div>
 
 
 

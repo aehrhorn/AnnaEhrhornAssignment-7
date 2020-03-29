@@ -3,6 +3,8 @@ title: "Anna Ehrhorn Assignment #7"
 output: html_notebook
 ---
 
+
+***
 Question 1
 A function that runs a linear regression and return a logical
 of the residuals that are the largest number with the following factors:
@@ -13,8 +15,7 @@ p = a number
 ```{r}
 lm.regress.resids <- function(x, y, p) {
   regression.model <- lm(y ~ x)
-  resids <- regression.model$residuals
-  absolute.resids <- abs(resids)
+  absolute.resids <- abs(regression.model$residuals)
   sort.resids <- sort(absolute.resids, decreasing = TRUE)
   cutoff <- sort.resids[p]
   logical.resids <- (absolute.resids >= cutoff)
@@ -22,7 +23,8 @@ lm.regress.resids <- function(x, y, p) {
 }
 ```
 
-Testing function
+
+Testing the developed function
 ```{r}
 x <- c(4, 5, 2, 8, 5, 9, 10, 1)
 y <- c(2, 6, 8, 1, 9, 2, 10, 3)
@@ -32,7 +34,10 @@ attributes(testlm)
 testlm$residuals
 lm.regress.resids(x, y, 3)
 ```
+***
 
+
+***
 Question 2
 Plot a scatterploy with a regression line of a quantitative response and 
 explanatory variable, and highlight the 10% largest residuals on the 
@@ -42,16 +47,24 @@ scatterplot.
 ```{r include=FALSE}
 library(here)
 
-my.data <- read.csv(here("XX.csv"))  #decide on dataset
+hsb2 <- read.csv(here("Data", "hsb2.csv"))
 ```
 
 ```{r}
-lm.regress.resids(x, y, 10) #enter in variables
+p <- round(0.1*(nrow(hsb2)))
 
-plot(correlation, col = "blue")
-              abline(regression.model)
-              
+regress.resids <- lm.regress.resids(hsb2$read, hsb2$write, 20)
 
+cor.write.read <- cor(hsb2$read, hsb2$write)
 
+regress.lm.model <- lm(hsb2$write ~ hsb2$read)
+
+plot(hsb2$read, hsb2$write,
+     main = "Relationship between High School Reading and Writing Achievement",
+     xlab = "Standardized Reading Achievement Score",
+     ylab = "Standardized Writing Achievement Score",
+     col = ifelse(regress.resids == TRUE, "blue", "black"),
+     pch = ifelse(regress.resids == TRUE, 15, 0))
+abline(regress.lm.model)
 ```
-
+***

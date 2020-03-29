@@ -4,28 +4,34 @@ output: html_notebook
 ---
 
 Question 1
-A function that runs a linear regression and prints a logical
-of the residuals that are the largest certain % with the following factors:
+A function that runs a linear regression and return a logical
+of the residuals that are the largest number with the following factors:
 x = explantory variable
 y = response variable
 p = a number
 
 ```{r}
 lm.regress.resids <- function(x, y, p) {
-  descriptives <- summary(my.data)
-  correlation <- cor(x, y)
-  regression.model <- lm(y ~ x,
-            data = my.data)
-  regress.model.sum <- summary(regression.model)
+  regression.model <- lm(y ~ x)
   resids <- regression.model$residuals
   absolute.resids <- abs(resids)
-  logical.resids <- as.logical(sort(absolute.resids) #how to select 10%
+  sort.resids <- sort(absolute.resids, decreasing = TRUE)
+  cutoff <- sort.resids[p]
+  logical.resids <- (absolute.resids >= cutoff)
   return(logical.resids)
-  print(plot(correlation, col = "blue")
-              abline(regression.model))
 }
 ```
 
+Testing function
+```{r}
+x <- c(4, 5, 2, 8, 5, 9, 10, 1)
+y <- c(2, 6, 8, 1, 9, 2, 10, 3)
+
+testlm <- lm(y~x)
+attributes(testlm)
+testlm$residuals
+lm.regress.resids(x, y, 3)
+```
 
 Question 2
 Plot a scatterploy with a regression line of a quantitative response and 
@@ -41,5 +47,11 @@ my.data <- read.csv(here("XX.csv"))  #decide on dataset
 
 ```{r}
 lm.regress.resids(x, y, 10) #enter in variables
+
+plot(correlation, col = "blue")
+              abline(regression.model)
+              
+
+
 ```
 

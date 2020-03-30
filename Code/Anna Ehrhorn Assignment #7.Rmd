@@ -1,6 +1,8 @@
 ---
-title: "Anna Ehrhorn Assignment #7"
-output: html_notebook
+title: 'Anna Ehrhorn Assignment #7'
+output:
+  html_document:
+    df_print: paged
 ---
 
 
